@@ -152,4 +152,33 @@ public class Color {
 
         return hslvals;
     }
+
+    public static float[] RGBtoCMYK(int red, int green, int blue, float[] cmykvals){
+        if(cmykvals == null){
+            cmykvals = new float[4];
+        }
+
+        float r = red/255.0f;
+        float g = green/255.0f;
+        float b = blue/255.0f;
+
+        float max = Math.max(r, Math.max(g, b));
+
+        float k = 1-max;
+
+        float c = (1 - r - k) / (1 - k);
+        float m = (1 - g - k) / (1 - k);
+        float y = (1 - b - k) / (1 - k);
+
+        c = Math.round(c * 100.0f) / 100.0f;
+        m = Math.round(m * 100.0f) / 100.0f;
+        y = Math.round(y * 100.0f) / 100.0f;
+
+        cmykvals[0] = c * 100;
+        cmykvals[1] = m * 100;
+        cmykvals[2] = y * 100;
+        cmykvals[3] = k * 100;
+
+        return cmykvals;
+    }
 }
