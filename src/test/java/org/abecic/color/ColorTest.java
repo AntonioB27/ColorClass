@@ -53,17 +53,34 @@ class ColorTest {
         assertArrayEquals(hsb_expected, hsb_converted);
     }
 
-    //@Test
+    @Test
     void testRGBtoHSL1() {
         var c = new Color(75, 191, 82);
         float[] hsl_expected = new float[3];
-        hsl_expected[0] = 124F;
-        hsl_expected[1] = 61F;
-        hsl_expected[2] = 52F;
+        hsl_expected[0] = 123.6207F;
+        hsl_expected[1] = 0.47540987F;
+        hsl_expected[2] = 0.52156866F;
 
         float[] hsl_converted = new float[3];
-        Color.RGBtoHSL(c.getRed(), c.getBlue(), c.getGreen(), hsl_converted);
+        Color.RGBtoHSL(75, 191, 82, hsl_converted);
 
         assertArrayEquals(hsl_expected, hsl_converted);
+    }
+
+    @Test
+    void testRGBtoCMYK(){
+        var c = new Color(16,16,16);
+        float[] cymk_expected = new float[4];
+
+        cymk_expected[0] = 0;
+        cymk_expected[1] = 0;
+        cymk_expected[2] = 0;
+        cymk_expected[3] = 93.725494f;
+
+        float[] cymk_converted = new float[4];
+
+        Color.RGBtoCMYK(c.getRed(), c.getBlue(), c.getGreen(), cymk_converted);
+
+        assertArrayEquals(cymk_converted, cymk_expected);
     }
 }
